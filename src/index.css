@@ -1,0 +1,159 @@
+/* ============================================================
+   TOKENS — defined on :root, redefined per theme
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --page:    #F8F9FB;
+  --surface: #FFFFFF;
+  --raised:  #F1F3F7;
+
+  /* Borders */
+  --line:    #DFE3E8;
+  --line-sm: #ECF0F3;
+
+  /* Text */
+  --ink:     #111827;
+  --ink-2:   #374151;
+  --muted:   #6B7280;
+  --faint:   #9CA3AF;
+
+  /* Accent — teal */
+  --accent:      #0F766E;
+  --accent-dim:  #F0FDFA;
+  --accent-text: #0D5E58;
+  --accent-hi:   #0E9280;
+
+  /* Semantic */
+  --ok:    #16A34A;
+  --ok-bg: #F0FDF4;
+  --err:   #DC2626;
+  --err-bg:#FEF2F2;
+
+  /* Code — intentionally dark even in light mode */
+  --code-surface: #1A2233;
+  --code-text:    #E2E8F0;
+  --code-muted:   #94A3B8;
+
+  /* Sidebar */
+  --sidebar-bg:   #F1F3F7;
+  --sidebar-w:    264px;
+
+  /* Misc */
+  --radius:  6px;
+  --shadow:  0 1px 3px rgba(17,24,39,.07), 0 1px 2px rgba(17,24,39,.04);
+  --shadow-md: 0 4px 12px rgba(17,24,39,.08), 0 1px 4px rgba(17,24,39,.05);
+  --mono: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+/* Dark mode via OS preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page:    #111827;
+    --surface: #1F2937;
+    --raised:  #273243;
+    --line:    #374151;
+    --line-sm: #2D3748;
+    --ink:     #F9FAFB;
+    --ink-2:   #E5E7EB;
+    --muted:   #9CA3AF;
+    --faint:   #6B7280;
+    --accent:      #2DD4BF;
+    --accent-dim:  #0C2928;
+    --accent-text: #5EEAD4;
+    --accent-hi:   #3DE0CC;
+    --ok:    #4ADE80;
+    --ok-bg: #052E16;
+    --err:   #F87171;
+    --err-bg:#450A0A;
+    --code-surface: #0D1117;
+    --code-text:    #E2E8F0;
+    --code-muted:   #94A3B8;
+    --sidebar-bg:   #18222F;
+    --shadow:    0 1px 3px rgba(0,0,0,.35);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+  }
+}
+
+/* Manual toggle overrides — must win in both directions */
+:root[data-theme="dark"] {
+  --page:    #111827;
+  --surface: #1F2937;
+  --raised:  #273243;
+  --line:    #374151;
+  --line-sm: #2D3748;
+  --ink:     #F9FAFB;
+  --ink-2:   #E5E7EB;
+  --muted:   #9CA3AF;
+  --faint:   #6B7280;
+  --accent:      #2DD4BF;
+  --accent-dim:  #0C2928;
+  --accent-text: #5EEAD4;
+  --accent-hi:   #3DE0CC;
+  --ok:    #4ADE80;
+  --ok-bg: #052E16;
+  --err:   #F87171;
+  --err-bg:#450A0A;
+  --code-surface: #0D1117;
+  --code-text:    #E2E8F0;
+  --code-muted:   #94A3B8;
+  --sidebar-bg:   #18222F;
+  --shadow:    0 1px 3px rgba(0,0,0,.35);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+}
+
+:root[data-theme="light"] {
+  --page:    #F8F9FB;
+  --surface: #FFFFFF;
+  --raised:  #F1F3F7;
+  --line:    #DFE3E8;
+  --line-sm: #ECF0F3;
+  --ink:     #111827;
+  --ink-2:   #374151;
+  --muted:   #6B7280;
+  --faint:   #9CA3AF;
+  --accent:      #0F766E;
+  --accent-dim:  #F0FDFA;
+  --accent-text: #0D5E58;
+  --accent-hi:   #0E9280;
+  --ok:    #16A34A;
+  --ok-bg: #F0FDF4;
+  --err:   #DC2626;
+  --err-bg:#FEF2F2;
+  --code-surface: #1A2233;
+  --code-text:    #E2E8F0;
+  --code-muted:   #94A3B8;
+  --sidebar-bg:   #F1F3F7;
+  --shadow:  0 1px 3px rgba(17,24,39,.07), 0 1px 2px rgba(17,24,39,.04);
+  --shadow-md: 0 4px 12px rgba(17,24,39,.08), 0 1px 4px rgba(17,24,39,.05);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.7;
+  background: var(--page);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root { min-height: 100svh; }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
