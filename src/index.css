@@ -157,3 +157,34 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; }
 }
+
+/* ============================================================
+   CCA-P — forced dark + violet, wins over any theme toggle
+   ============================================================ */
+:root[data-exam="ccap"],
+:root[data-exam="ccap"][data-theme="light"],
+:root[data-exam="ccap"][data-theme="dark"] {
+  --page:         #0F172A;
+  --surface:      #1E293B;
+  --raised:       #263044;
+  --line:         #334155;
+  --line-sm:      #1E293B;
+  --ink:          #F8FAFC;
+  --ink-2:        #CBD5E1;
+  --muted:        #94A3B8;
+  --faint:        #64748B;
+  --accent:       #818CF8;
+  --accent-dim:   #1E1B4B;
+  --accent-text:  #A5B4FC;
+  --accent-hi:    #6366F1;
+  --ok:           #4ADE80;
+  --ok-bg:        #052E16;
+  --err:          #F87171;
+  --err-bg:       #450A0A;
+  --code-surface: #0D1117;
+  --code-text:    #E2E8F0;
+  --code-muted:   #94A3B8;
+  --sidebar-bg:   #080F1E;
+  --shadow:       0 1px 3px rgba(0,0,0,.5);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.6);
+}

@@ -3,7 +3,12 @@ import Sidebar from './components/Sidebar';
 import ScenarioSection from './components/ScenarioSection';
 import PracticeSection from './components/PracticeSection';
 import MockTestSection from './components/MockTestSection';
+import DrillSection from './components/DrillSection';
+import CcapOverview from './components/CcapOverview';
+import CcapCheatsheet from './components/CcapCheatsheet';
+import CcapHtmlViewer from './components/CcapHtmlViewer';
 import { scenarios } from './data/scenarioData';
+import { ccapDrillQuestions } from './data/ccapDrillData';
 import './App.css';
 
 const domains = [
@@ -77,18 +82,50 @@ function OverviewPage() {
   );
 }
 
+function CcapDrillPage() {
+  if (ccapDrillQuestions.length === 0) {
+    return (
+      <div className="page">
+        <div className="page-hero" style={{ paddingBottom: 20 }}>
+          <span className="section-badge">Drill Mode</span>
+          <h1 className="page-title" style={{ marginBottom: 8 }}>CCA-P Drill Mode</h1>
+          <p style={{ color: 'var(--muted)', fontSize: '0.88rem' }}>
+            Questions will appear here as we study each domain.
+          </p>
+        </div>
+        <div className="page-body">
+          <div className="coming-soon">
+            <strong>No questions yet</strong>
+            Start sharing CCA-P questions and we'll build this out domain by domain.
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return <DrillSection />;
+}
+
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme);
   const [activePage, setActivePage] = useState('overview');
+  const [examMode, setExamMode] = useState('ccaf');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Scroll the main area to top whenever page changes
+  useEffect(() => {
+    document.documentElement.setAttribute('data-exam', examMode);
+  }, [examMode]);
+
   const handleNav = (id) => {
     setActivePage(id);
     document.getElementById('main-scroll')?.scrollTo({ top: 0 });
+  };
+
+  const handleExamChange = (mode) => {
+    setExamMode(mode);
+    setActivePage(mode === 'ccaf' ? 'overview' : 'ccap-overview');
   };
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
@@ -102,17 +139,30 @@ export default function App() {
         onNav={handleNav}
         theme={theme}
         onToggleTheme={toggleTheme}
+        examMode={examMode}
+        onExamChange={handleExamChange}
       />
 
       <main className="main" id="main-scroll">
-        {activePage === 'overview' && <OverviewPage />}
-        {activePage.startsWith('practice-') && (
+        {/* CCA-F pages */}
+        {examMode === 'ccaf' && activePage === 'overview' && <OverviewPage />}
+        {examMode === 'ccaf' && activePage === 'drill' && <DrillSection />}
+        {examMode === 'ccaf' && activePage.startsWith('practice-') && (
           <PracticeSection key={activePage} setId={activePage.replace('practice-', '')} />
         )}
-        {activePage.startsWith('mock-') && (
+        {examMode === 'ccaf' && activePage.startsWith('mock-') && (
           <MockTestSection key={activePage} testId={activePage.replace('mock-', '')} />
         )}
-        {activeScenario && <ScenarioSection key={activeScenario.id} scenario={activeScenario} />}
+        {examMode === 'ccaf' && activeScenario && (
+          <ScenarioSection key={activeScenario.id} scenario={activeScenario} />
+        )}
+
+        {/* CCA-P pages */}
+        {examMode === 'ccap' && activePage === 'ccap-overview'   && <CcapOverview />}
+        {examMode === 'ccap' && activePage === 'ccap-drill'      && <CcapDrillPage />}
+        {examMode === 'ccap' && activePage === 'ccap-cheatsheet' && <CcapCheatsheet />}
+        {examMode === 'ccap' && activePage === 'ccap-exam-sim'   && <CcapHtmlViewer src="/ccar-p-exam-simulation.html" title="Exam Simulation" />}
+        {examMode === 'ccap' && activePage === 'ccap-practice'   && <CcapHtmlViewer src="/ccar-p-practice-exam.html" title="Practice Exam" />}
       </main>
     </div>
   );
