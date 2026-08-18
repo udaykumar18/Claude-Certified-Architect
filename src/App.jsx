@@ -5,6 +5,7 @@ import PracticeSection from './components/PracticeSection';
 import MockTestSection from './components/MockTestSection';
 import DrillSection from './components/DrillSection';
 import CcapOverview from './components/CcapOverview';
+import CcapD1 from './components/CcapD1';
 import CcapCheatsheet from './components/CcapCheatsheet';
 import CcapHtmlViewer from './components/CcapHtmlViewer';
 import { scenarios } from './data/scenarioData';
@@ -159,6 +160,7 @@ export default function App() {
 
         {/* CCA-P pages */}
         {examMode === 'ccap' && activePage === 'ccap-overview'   && <CcapOverview />}
+        {examMode === 'ccap' && activePage === 'ccap-d1'        && <CcapD1 />}
         {examMode === 'ccap' && activePage === 'ccap-drill'      && <CcapDrillPage />}
         {examMode === 'ccap' && activePage === 'ccap-cheatsheet' && <CcapCheatsheet />}
         {examMode === 'ccap' && activePage === 'ccap-exam-sim'   && <CcapHtmlViewer src="/ccar-p-exam-simulation.html" title="Exam Simulation" />}

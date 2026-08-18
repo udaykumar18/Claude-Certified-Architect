@@ -152,6 +152,21 @@ export default function Sidebar({ activePage, onNav, theme, onToggleTheme, examM
             <span style={{ marginLeft: 'auto', fontSize: '0.6rem', color: 'var(--faint)', fontWeight: 600 }}>0Q</span>
           </button>
 
+          <div className="nav-group-label">Domains</div>
+          {[
+            { id: 'ccap-d1', code: 'D1', label: 'Solution Design & Architecture', q: '11q' },
+          ].map((d) => (
+            <button
+              key={d.id}
+              className={`nav-item ${activePage === d.id ? 'active' : ''}`}
+              onClick={() => onNav(d.id)}
+            >
+              <span className="nav-num" style={{ fontSize: '0.55rem', letterSpacing: 0 }}>{d.code}</span>
+              <span className="nav-text">{d.label}</span>
+              <span style={{ marginLeft: 'auto', fontSize: '0.6rem', fontWeight: 700, color: 'var(--faint)', flexShrink: 0 }}>{d.q}</span>
+            </button>
+          ))}
+
           <div className="nav-group-label">Resources</div>
           {[
             { id: 'ccap-cheatsheet',  icon: '📋', label: 'Cheatsheet' },
